@@ -54,7 +54,6 @@ import { CreateTitleS, FileTimeStr, TitleSelectUtil } from "./utils.ts";
 
 let xlsx_path = ref("");       // xls表格文件路径
 let main_dir = ref("");        // xls表格文件路径所在文件夹
-let _out_dir = ref("");        // docx文件输出文件夹
 let template_path = ref("");   // 使用的docx模版文件
 
 let table_name_list = ref([]);            // 数据表名列表
@@ -64,7 +63,6 @@ let data_row_number_statr = ref(0);       // 数据起始行
 let data_row_number_end = ref(0);         // 数据结束行
 let data_row_sum = ref(0);                  // 数据总行数
 let data_col_sum = ref(0);                 // 数据总列数
-let _col_name = reactive([]);
 
 let titleData = ref<Array<{ name: string, select: boolean }>>([]);   // xlsx标题行
 let titleSelect = ref<Array<{}>>([]);   // 选中的标题列
