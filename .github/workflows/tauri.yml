@@ -1,6 +1,9 @@
 name: 'publish'
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -47,17 +50,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
       # 下载之前上传的构建产物
       - uses: actions/download-artifact@v3
         id: download
         with:
           name: artifacts
           path: artifacts
-      # 并创建一个包含构建产物的发布版本
-      - name: 'create release'
-        uses: softprops/action-gh-release@master
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        with:
-          draft: false
-          files: ./artifacts/**/*
+      
+      # 创建release分支并提交编译产物
+      - name: 创建release分支并提交编译产物
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 检查release分支是否存在，如果存在则删除
+          if git show-ref --verify --quiet refs/heads/release; then
+            git branch -D release
+          fi
+          
+          # 创建并切换到release分支
+          git checkout -b release
+          
+          # 创建releases目录并复制构建产物
+          mkdir -p releases
+          cp -r artifacts/* releases/
+          
+          # 提交到release分支
+          git add releases/
+          git commit -m "发布编译产物 $(date +'%Y-%m-%d %H:%M:%S')"
+          
+          # 推送release分支
+          git push origin release --force
