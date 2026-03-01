@@ -1,9 +1,6 @@
 name: 'publish'
 
-on:
-  push:
-    branches:
-      - release
+on: push
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -39,7 +36,7 @@ jobs:
       - uses: JonasKruckenberg/tauri-build@v1
         id: tauri_build
 
-      # The `artifacts` output can now be used by a different action to upload the artifacts
+      # `artifacts` 输出现在可以被不同的操作用于上传构建产物
       - uses: actions/upload-artifact@v3
         with:
           name: artifacts
@@ -50,13 +47,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # Download the previously uploaded artifacts
+      # 下载之前上传的构建产物
       - uses: actions/download-artifact@v3
         id: download
         with:
           name: artifacts
           path: artifacts
-      # And create a release with the artifacts attached
+      # 并创建一个包含构建产物的发布版本
       - name: 'create release'
         uses: softprops/action-gh-release@master
         env:
