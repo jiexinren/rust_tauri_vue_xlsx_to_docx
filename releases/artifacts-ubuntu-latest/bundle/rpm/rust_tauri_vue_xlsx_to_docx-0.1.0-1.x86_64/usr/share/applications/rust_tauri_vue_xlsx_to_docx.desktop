@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=
+Comment=A Tauri App
+Exec=rust_tauri_vue_xlsx_to_docx
+StartupWMClass=rust_tauri_vue_xlsx_to_docx
+Icon=rust_tauri_vue_xlsx_to_docx
+Name=rust_tauri_vue_xlsx_to_docx
+Terminal=false
+Type=Application

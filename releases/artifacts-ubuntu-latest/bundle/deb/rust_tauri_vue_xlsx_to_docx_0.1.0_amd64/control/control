@@ -1,0 +1,9 @@
+Package: rust-tauri-vue-xlsx-to-docx
+Version: 0.1.0
+Architecture: amd64
+Installed-Size: 15489
+Maintainer: you
+Priority: optional
+Depends: libwebkit2gtk-4.1-0, libgtk-3-0
+Description: A Tauri App
+ (none)
