@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 // import { invoke } from "@tauri-apps/api/core";
 import { open } from '@tauri-apps/plugin-dialog';
 import { dirname } from '@tauri-apps/api/path';
